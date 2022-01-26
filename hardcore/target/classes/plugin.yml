@@ -1,0 +1,10 @@
+main: me.stoworm.Main
+name: MCHardcore
+author: Stoworm
+version: 0.1
+api-version: 1.18
+
+commands:
+  options:
+  startTimer:
+  setTimer:
