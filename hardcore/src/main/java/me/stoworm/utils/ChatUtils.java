@@ -4,5 +4,7 @@ import org.bukkit.ChatColor;
 
 public class ChatUtils 
 {
-    public String prefix = ChatColor.GRAY + "[" + ChatColor.GOLD + "Hardcore" + ChatColor.GRAY + "] " + ChatColor.RESET;
+
+    public static String prefix = ChatColor.GRAY + "[" + ChatColor.RED + "HC" + ChatColor.GRAY + "]" + ChatColor.RESET;
+    
 }
