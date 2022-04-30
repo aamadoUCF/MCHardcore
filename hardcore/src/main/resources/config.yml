@@ -1,5 +1,5 @@
 ##Values are in minutes.
-timer: 120
-bonus:
-  time: 20
-  enabled: true
+timer:
+  length: -1
+  bonus: -1
+  penalty: -1
