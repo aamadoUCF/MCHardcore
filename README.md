@@ -1,7 +1,7 @@
 # MCHardcore
 
 
-Minecraft hardcore plugin for the Minecraft 1.18.1
+Minecraft hardcore plugin for the Minecraft 1.2.5
 
 Plugin Features:
 
@@ -9,6 +9,7 @@ Plugin Features:
 - Pseudo spectator mode for dead players
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 TODO
 Timer System:
 - Have a countdown
