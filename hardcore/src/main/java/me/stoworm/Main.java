@@ -1,7 +1,10 @@
 package me.stoworm;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.stoworm.utils.ChatUtils;
@@ -23,6 +26,8 @@ public class Main extends JavaPlugin
     public ConfigUtils configUtils = new ConfigUtils(this);
     public SetupUtils setupUtils = new SetupUtils(this);
 
+    public static ArrayList<Player> playersAlive = new ArrayList<>();
+
     public void onEnable()
     {
         configUtils.loadConfig();
@@ -35,5 +40,9 @@ public class Main extends JavaPlugin
     {
         Bukkit.getLogger().info(ChatUtils.prefix + ChatColor.RED + "has been disabled.");
     }
+
+    // TODO
+    // CUSTOM DEATH MESSAGE (Stored in config (?))
+    // Stats (% Dmg from dragon, etc)
 
 }

@@ -42,7 +42,7 @@ public class ConfigUtils
         return true;
     }
 
-    public boolean setTimerValue(int input, String configPath)
+    public boolean setConfigValue(int input, String configPath)
     {
         plugin.getConfig().set(configPath, input);
         plugin.saveConfig();
@@ -50,4 +50,9 @@ public class ConfigUtils
         return true;
     }
     
+    public String getConfigValue(String configPath)
+    {
+        return plugin.getConfig().get(configPath).toString();
+    }
+
 } 
