@@ -5,9 +5,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import me.stoworm.Main;
@@ -87,6 +89,34 @@ public class DeadEvents implements Listener
             return;
 
         e.setCancelled(true);
+        return;
+    }
+
+    @EventHandler
+    public void noPickup(PlayerPickupItemEvent e)
+    {
+        Player p = e.getPlayer();
+        if (Main.playersAlive.contains(p))
+            return;
+
+        e.setCancelled(true);
+        return;
+    }
+
+    @EventHandler
+    public void noHitting(EntityDamageByEntityEvent e)
+    {
+        if (!(e.getEntity() instanceof Player))
+            if (!(e.getDamager() instanceof Player))
+                return;
+
+        Player d = (Player) e.getDamager();
+
+        if (Main.playersDead.contains(d))
+        {
+            e.setCancelled(true);
+        }
+
         return;
     }
 }
