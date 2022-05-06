@@ -57,7 +57,7 @@ public class SetupUtils
 
     public void spectatorMode(Player p)
     {
-        if (Main.gameState != GameState.INGAME)
+        if (Main.gameState != GameState.INGAME || Main.gameState == GameState.POSTGAME)
             return;
 
         p.setGameMode(GameMode.CREATIVE);

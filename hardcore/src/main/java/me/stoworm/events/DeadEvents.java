@@ -1,5 +1,6 @@
 package me.stoworm.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -110,10 +111,17 @@ public class DeadEvents implements Listener
             if (!(e.getDamager() instanceof Player))
                 return;
 
+        Player p = (Player) e.getEntity();
         Player d = (Player) e.getDamager();
+
+        Bukkit.broadcastMessage("p: " + p.getName());
+        Bukkit.broadcastMessage("d: " + d.getName());
+        
+
 
         if (Main.playersDead.contains(d))
         {
+            Bukkit.broadcastMessage("d is dead");
             e.setCancelled(true);
         }
 

@@ -34,6 +34,8 @@ public class GameEvents implements Listener
             // Give everyone something to remember the fallen
             p.getWorld().strikeLightningEffect(ploc);
 
+            Main.playersDead.add(p);
+
             if (Main.playersAlive.size() > 0)
             {
                 // Add time to the timer :)
