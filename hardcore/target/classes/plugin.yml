@@ -10,3 +10,4 @@ commands:
   setTimer:
   setBonus:
   setPenalty:
+  penalty:
