@@ -45,6 +45,8 @@ public class StartTimer implements CommandExecutor
 
             // Convert Minutes to Seconds.
             Main.timer *= 60;
+            Main.bonusTime *= 60;
+            Main.penalty *= 60;
 
             Main.gameState = GameState.INGAME;
 
@@ -101,21 +103,32 @@ public class StartTimer implements CommandExecutor
                         ChatColor.GRAY + " seconds remaining.");
                     }
 
-                    if (Main.timer <= 10 && Main.timer >= 0)
+                    if (Main.timer <= 10 && Main.timer > 0)
                     {
                         Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.GRAY + ChatColor.MAGIC + "ASDAS The cftgvhb" + ChatColor.DARK_RED + ChatColor.BOLD + (Main.timer) + 
                         ChatColor.GRAY + " SECOND" + ((Main.timer == 1) ? "" : "S") + " LEFT!");
                     }
+
+                    // Just in case the last person dies after the timer has been deducted.
+                    if (Main.timer < 0)
+                        Main.timer = 0;
 
                     // Kill all the alive players muhahaha
                     if (Main.timer == 0)
                     {
                         doneFlag = true;
 
-                        for (Player p : Main.playersAlive)
-                            p.damage(999999);
+                        if (Main.playersAlive.size() > 0)
+                        {
+                            for (Player p : Main.playersAlive)
+                            {
+                                if (!(Main.playersSafe.contains(p)))
+                                    p.damage(999999);
 
-                        Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.DARK_PURPLE + "You all have succumbed to defeat.");
+                            }
+                        }
+
+                        Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.DARK_PURPLE + "Those of who haven't made it to the end will perish.");
 
                         Main.gameState = GameState.PREGAME;
                     }

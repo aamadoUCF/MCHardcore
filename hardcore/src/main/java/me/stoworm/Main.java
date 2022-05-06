@@ -27,11 +27,15 @@ public class Main extends JavaPlugin
     public SetupUtils setupUtils = new SetupUtils(this);
 
     public static ArrayList<Player> playersAlive = new ArrayList<>();
+    public static ArrayList<Player> playersDead = new ArrayList<>();
+    public static ArrayList<Player> playersSafe = new ArrayList<>();
 
     public void onEnable()
     {
         configUtils.loadConfig();
+
         setupUtils.setupCommands();
+        setupUtils.setupEvents();
 
         Bukkit.getLogger().info(ChatUtils.prefix + ChatColor.GREEN + "has been enabled.");
     }
@@ -44,5 +48,7 @@ public class Main extends JavaPlugin
     // TODO
     // CUSTOM DEATH MESSAGE (Stored in config (?))
     // Stats (% Dmg from dragon, etc)
+    // Cain timer announce command
+    // Penalty command
 
 }
