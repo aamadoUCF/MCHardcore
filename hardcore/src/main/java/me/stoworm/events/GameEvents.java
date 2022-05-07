@@ -72,7 +72,7 @@ public class GameEvents implements Listener
 
                 if (Main.overtime)
                 {
-                    Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.DARK_PURPLE + ChatColor.ITALIC + "Your valiant effort was not enough. Game over.");
+                    Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.DARK_PURPLE + ChatColor.ITALIC + "Your valiant effort was not enough... Game over.");
 
                     Main.gameState = GameState.PREGAME;
                 }
@@ -123,6 +123,6 @@ public class GameEvents implements Listener
         if (e.getCause() == TeleportCause.END_PORTAL)
             Main.playersSafe.add(p);
         
-        p.sendMessage(ChatUtils.prefix + ChatColor.GREEN + "You made it to the End. (somehow)");
+        p.sendMessage(ChatUtils.prefix + ChatColor.GRAY + "You made it to " + ChatColor.DARK_PURPLE + "The End" + ChatColor.GRAY + "...");
     }
 }

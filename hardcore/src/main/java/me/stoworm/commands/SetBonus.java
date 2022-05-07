@@ -31,6 +31,12 @@ public class SetBonus implements CommandExecutor
                 return false;
             }
 
+            if (Main.gameState != GameState.INGAME)
+            {
+                sender.sendMessage(ChatUtils.inGameError);
+                return false;
+            }
+
             if (!(sender.isOp()) || !(sender.hasPermission("hc.admin")))
             {
                 sender.sendMessage(ChatUtils.prefix + ChatColor.RED + "You do not have permission to execute this command!");

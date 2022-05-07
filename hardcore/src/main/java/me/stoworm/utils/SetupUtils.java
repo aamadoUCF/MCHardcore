@@ -14,6 +14,7 @@ import me.stoworm.commands.Penalty;
 import me.stoworm.commands.SetBonus;
 import me.stoworm.commands.SetPenalty;
 import me.stoworm.commands.SetTimer;
+import me.stoworm.commands.Spectate;
 import me.stoworm.commands.StartTimer;
 import me.stoworm.events.DeadEvents;
 import me.stoworm.events.GameEvents;
@@ -42,6 +43,8 @@ public class SetupUtils
         plugin.getCommand("penalty").setExecutor(new Penalty());
         plugin.getCommand("broadcast").setExecutor(new Broadcast());
         plugin.getCommand("bc").setExecutor(new Broadcast());
+        plugin.getCommand("spectate").setExecutor(new Spectate());
+        plugin.getCommand("spec").setExecutor(new Spectate());
 
         Bukkit.getLogger().info(ChatUtils.prefix + ChatColor.GREEN + "Loaded commands.");
     
@@ -68,7 +71,8 @@ public class SetupUtils
         hideDeadPlayer(p);
 
         p.sendMessage(ChatUtils.prefix + ChatColor.GRAY + "Welcome to 'spectator' mode. Alive players cannot see you right now. You are in creative mode, " +
-        "but you cannot interact with the world. Right click the ghast tear to bring up a menu to teleport to current alive players.");
+        "but you cannot interact with the world. Right click the ghast tear to teleport to a random alive player.");
+        p.sendMessage(ChatColor.GRAY + "Alternatively, use the command '/spec <alivePlayer>' to teleport to a specific person.");
 
         p.getInventory().clear();
 

@@ -1,8 +1,13 @@
 package me.stoworm.events;
 
+import java.util.Random;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -11,8 +16,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
 
 import me.stoworm.Main;
+import me.stoworm.utils.ChatUtils;
 import me.stoworm.utils.GameState;
 import me.stoworm.utils.GameUtils;
 import me.stoworm.utils.SetupUtils;
@@ -60,6 +67,37 @@ public class DeadEvents implements Listener
             return;
 
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onSpecTp(PlayerInteractEvent e)
+    {
+        Player p = e.getPlayer();
+
+        if (!(gameUtils.inArray(Main.playersDead, p.getName())))
+            return;
+
+        if (p.getItemInHand() == null || p.getItemInHand() == new ItemStack(Material.AIR))
+            return;
+
+        if (p.getItemInHand() != new ItemStack(Material.GHAST_TEAR))
+            return;
+
+        if (Main.gameState != GameState.INGAME)
+            return;
+
+        if (e.getAction() != Action.RIGHT_CLICK_AIR || e.getAction() != Action.RIGHT_CLICK_BLOCK)
+            return;
+
+        Random r = new Random();
+        int chance = r.nextInt(Main.playersAlive.size() - 1);
+
+        Player randomPlayer = Main.playersAlive.get(chance);
+
+        p.teleport(randomPlayer.getLocation());
+        p.sendMessage(ChatUtils.prefix + ChatColor.GRAY + "Teleporting to " + ChatColor.GREEN + randomPlayer.getName() + ChatColor.GRAY + "...");
+
+        return;
     }
 
     @EventHandler
@@ -126,4 +164,5 @@ public class DeadEvents implements Listener
 
         return;
     }
+
 }

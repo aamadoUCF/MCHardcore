@@ -1,8 +1,7 @@
 main: me.stoworm.Main
 name: MCHardcore
 author: Stoworm
-version: 0.1
-api-version: 1.18
+version: 1.0
 
 commands:
   options:
@@ -13,3 +12,5 @@ commands:
   penalty:
   broadcast:
   bc:
+  spectate:
+  spec:

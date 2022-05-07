@@ -26,7 +26,7 @@ public class Penalty implements CommandExecutor
 
             if (Main.gameState != GameState.INGAME)
             {
-                sender.sendMessage(ChatUtils.prefix + ChatColor.RED + "You can only use this command in-game.");
+                sender.sendMessage(ChatUtils.inGameError);
     
                 return false;
             }

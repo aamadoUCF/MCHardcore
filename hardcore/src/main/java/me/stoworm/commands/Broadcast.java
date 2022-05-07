@@ -25,7 +25,7 @@ public class Broadcast implements CommandExecutor
 
             if (Main.gameState != GameState.INGAME)
             {
-                sender.sendMessage(ChatUtils.prefix + ChatColor.RED + "You can only use this command while the timer is running.");
+                sender.sendMessage(ChatUtils.inGameError);
 
                 Bukkit.broadcastMessage(ChatUtils.prefix);
 

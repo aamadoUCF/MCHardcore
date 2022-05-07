@@ -38,6 +38,12 @@ public class SetTimer implements CommandExecutor
                 return false;
             }
 
+            if (Main.gameState != GameState.INGAME)
+            {
+                sender.sendMessage(ChatUtils.inGameError);
+                return false;
+            }
+
             // Tell them theyre stupid.
             if (args.length <= 0)
             {
