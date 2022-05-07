@@ -48,9 +48,6 @@ public class Main extends JavaPlugin
     }
 
     // TODO
-    // CUSTOM DEATH MESSAGE (Stored in config (?))
     // Stats (% Dmg from dragon, etc)
-    // Cain timer announce command
-    // Penalty command
 
 }
