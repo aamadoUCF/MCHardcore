@@ -2,8 +2,10 @@ package me.stoworm.events;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,12 +13,14 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import me.stoworm.Main;
 import me.stoworm.utils.ChatUtils;
@@ -163,6 +167,32 @@ public class DeadEvents implements Listener
             e.setCancelled(true);
 
         return;
+    }
+
+    @EventHandler
+    public void onXpTarget(EntityTargetEvent e)
+    {
+        if (e.isCancelled())
+            return;
+
+        if (!(e.getTarget() instanceof  Player))
+            return;
+
+        Player p = (Player) e.getTarget();
+
+        if (!(gameUtils.inArray(Main.playersDead, p.getName())))
+            return;
+
+        if (!(e.getEntity() instanceof ExperienceOrb))
+            return;
+
+        Vector v = p.getLocation().getDirection();
+        v.multiply(0.0001);
+        v.normalize();
+        v.setY(0.01);
+
+        e.getEntity().setVelocity(v);
+        e.setCancelled(true);
     }
 
 }
