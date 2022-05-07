@@ -33,7 +33,7 @@ public class Broadcast implements CommandExecutor
             }
 
             int h = Main.timer / 3600;
-            int m = h % 60;
+            int m = (Main.timer % 3600) / 60;
             int s = Main.timer % 60;
 
             Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.GRAY + "Time Remaining: " + ChatColor.GREEN + h + "h " + m + "m " + s + "s");

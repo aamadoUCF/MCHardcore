@@ -27,12 +27,11 @@ public class Penalty implements CommandExecutor
             if (Main.gameState != GameState.INGAME)
             {
                 sender.sendMessage(ChatUtils.prefix + ChatColor.RED + "You can only use this command in-game.");
-
-                Bukkit.broadcastMessage(ChatUtils.prefix);
-
+    
                 return false;
             }
 
+            Bukkit.broadcastMessage(ChatColor.RED + "-" + Integer.toString(Main.penalty / 60)+ " minutes.");
             Main.timer -= Main.penalty;
 
         }

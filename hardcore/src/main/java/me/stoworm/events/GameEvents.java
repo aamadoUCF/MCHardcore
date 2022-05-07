@@ -58,7 +58,7 @@ public class GameEvents implements Listener
                 int m = h % 60;
                 int s = Main.timer % 60;
 
-                Bukkit.broadcastMessage(ChatColor.GREEN + Integer.toString(Main.bonusTime) + " minutes!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + "+" + Integer.toString(Main.bonusTime / 60) + " minutes!");
 
                 Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.GRAY + "Time Remaining: " + ChatColor.GREEN + h + "h " + m + "m " + s + "s");
                 return;

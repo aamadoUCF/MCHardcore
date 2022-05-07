@@ -128,7 +128,7 @@ public class StartTimer implements CommandExecutor
                     }
 
                     // Kill all the alive players muhahaha
-                    if (Main.timer == 0)
+                    if (Main.timer <= 0)
                     {
                         doneFlag = true;
 
@@ -151,7 +151,7 @@ public class StartTimer implements CommandExecutor
                             plugin.getServer().getScheduler().cancelTask(task);
 
                             Main.overtime = true;
-                            
+
                             return;
                         }
 
