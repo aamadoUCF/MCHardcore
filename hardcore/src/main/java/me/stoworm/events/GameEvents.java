@@ -16,9 +16,12 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import me.stoworm.Main;
 import me.stoworm.utils.ChatUtils;
 import me.stoworm.utils.GameState;
+import me.stoworm.utils.GameUtils;
 
 public class GameEvents implements Listener
 {
+    GameUtils gameUtils = new GameUtils();
+
     @EventHandler
     public void RemoveAliveStatus(PlayerDeathEvent e)
     {
@@ -28,13 +31,19 @@ public class GameEvents implements Listener
         if (Main.gameState == GameState.INGAME)
         {
             // Remove them from alive players array
-            if (Main.playersAlive.contains(p))
+            if (gameUtils.inArray(Main.playersAlive, p.getName()))
+            {
                 Main.playersAlive.remove(p);
+            }
+
+            if (!(gameUtils.inArray(Main.playersDead, p.getName())))
+            {
+                Main.playersDead.add(p);
+            }
 
             // Give everyone something to remember the fallen
             p.getWorld().strikeLightningEffect(ploc);
 
-            Main.playersDead.add(p);
 
             if (Main.playersAlive.size() > 0)
             {
@@ -44,6 +53,14 @@ public class GameEvents implements Listener
                 Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.RED + p.getDisplayName() + ChatColor.GRAY + " has fallen. " + ChatColor.RED + Main.playersAlive.size() +
                 ChatColor.GRAY + " player" + ((Main.playersAlive.size() > 1) ? "s" : "") + " remaining." + 
                 ((Main.playersAlive.size() > 1) ? ".." + ChatColor.RED : " Good luck... you'll need it."));
+
+                int h = Main.timer / 3600;
+                int m = h % 60;
+                int s = Main.timer % 60;
+
+                Bukkit.broadcastMessage(ChatColor.GREEN + Integer.toString(Main.bonusTime) + " minutes!");
+
+                Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.GRAY + "Time Remaining: " + ChatColor.GREEN + h + "h " + m + "m " + s + "s");
                 return;
             }
 
@@ -52,6 +69,13 @@ public class GameEvents implements Listener
                 Main.timer = 0;
                 Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.RED + p.getDisplayName() + ChatColor.GRAY + " has fallen. " + ChatColor.RED + Main.playersAlive.size() +
                 ChatColor.GRAY + " players remain.");
+
+                if (Main.overtime)
+                {
+                    Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.DARK_PURPLE + ChatColor.ITALIC + "Your valiant effort was not enough. Game over.");
+
+                    Main.gameState = GameState.PREGAME;
+                }
             }
         }
 
@@ -99,5 +123,6 @@ public class GameEvents implements Listener
         if (e.getCause() == TeleportCause.END_PORTAL)
             Main.playersSafe.add(p);
         
+        p.sendMessage(ChatUtils.prefix + ChatColor.GREEN + "You made it to the End. (somehow)");
     }
 }

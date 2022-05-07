@@ -11,3 +11,5 @@ commands:
   setBonus:
   setPenalty:
   penalty:
+  broadcast:
+  bc:

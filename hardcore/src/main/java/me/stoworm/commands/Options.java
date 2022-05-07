@@ -29,6 +29,7 @@ public class Options implements CommandExecutor
             sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.GREEN + "Penalty" + ChatColor.GRAY + ": " + ChatColor.RESET + plugin.configUtils.getConfigValue("timer.penalty"));
             sender.sendMessage("");
             sender.sendMessage(ChatColor.GOLD + "Time Remaining" + ChatColor.GRAY + ": " + ChatColor.RESET + Main.timer);
+            sender.sendMessage(ChatColor.GOLD + "Game State" + ChatColor.GRAY + ": " + ChatColor.RED + Main.gameState);
             sender.sendMessage(ChatColor.GRAY + "-=-=-=-=-=-=-=-=-=-=-=-=-");
 
         }

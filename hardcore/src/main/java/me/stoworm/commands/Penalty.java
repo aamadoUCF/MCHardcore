@@ -12,12 +12,6 @@ import me.stoworm.utils.GameState;
 
 public class Penalty implements CommandExecutor
 {
-    private Main plugin;
-
-    public Penalty(Main plugin)
-    {
-        this.plugin = plugin;
-    }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String [] args)
     {

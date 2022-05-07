@@ -2,6 +2,7 @@ package me.stoworm.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -55,6 +56,8 @@ public class StartTimer implements CommandExecutor
             for (Player p : plugin.getServer().getOnlinePlayers())
             {
                 Main.playersAlive.add(p);
+
+                p.setGameMode(GameMode.SURVIVAL);
 
                 sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.GOLD + p.getDisplayName());
             }
@@ -113,6 +116,17 @@ public class StartTimer implements CommandExecutor
                     if (Main.timer < 0)
                         Main.timer = 0;
 
+
+                    if (Main.playersAlive.size() == 0)
+                    {
+                        doneFlag = true;
+                        Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.DARK_PURPLE + ChatColor.ITALIC + "Your valiant effort was not enough. Game over.");
+                        plugin.getServer().getScheduler().cancelTask(task);
+
+                        Main.gameState = GameState.PREGAME;
+                        return;
+                    }
+
                     // Kill all the alive players muhahaha
                     if (Main.timer == 0)
                     {
@@ -129,8 +143,19 @@ public class StartTimer implements CommandExecutor
                         }
 
                         Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.DARK_PURPLE + "Those of who haven't made it to the end will perish.");
+                        
+                        if (Main.playersAlive.size() > 0)
+                        {
+                            Bukkit.broadcastMessage(ChatUtils.prefix + ChatColor.GOLD + "You" + ((Main.playersAlive.size() > 1) ? " " + Main.playersAlive.size() : "") + 
+                                " are our last hope! We're counting on you.");
+                            plugin.getServer().getScheduler().cancelTask(task);
 
-                        Main.gameState = GameState.PREGAME;
+                            Main.overtime = true;
+                            
+                            return;
+                        }
+
+                        return;
                     }
                 }
 

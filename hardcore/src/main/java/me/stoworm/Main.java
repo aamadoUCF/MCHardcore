@@ -30,6 +30,8 @@ public class Main extends JavaPlugin
     public static ArrayList<Player> playersDead = new ArrayList<>();
     public static ArrayList<Player> playersSafe = new ArrayList<>();
 
+    public static boolean overtime = false;
+
     public void onEnable()
     {
         configUtils.loadConfig();

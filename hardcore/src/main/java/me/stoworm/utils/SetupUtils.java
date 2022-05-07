@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.stoworm.Main;
+import me.stoworm.commands.Broadcast;
 import me.stoworm.commands.Options;
 import me.stoworm.commands.Penalty;
 import me.stoworm.commands.SetBonus;
@@ -38,7 +39,9 @@ public class SetupUtils
         plugin.getCommand("setPenalty").setExecutor(new SetPenalty(plugin));
         plugin.getCommand("options").setExecutor(new Options(plugin));
         plugin.getCommand("startTimer").setExecutor(new StartTimer(plugin));
-        plugin.getCommand("penalty").setExecutor(new Penalty(plugin));
+        plugin.getCommand("penalty").setExecutor(new Penalty());
+        plugin.getCommand("broadcast").setExecutor(new Broadcast());
+        plugin.getCommand("bc").setExecutor(new Broadcast());
 
         Bukkit.getLogger().info(ChatUtils.prefix + ChatColor.GREEN + "Loaded commands.");
     
@@ -82,6 +85,12 @@ public class SetupUtils
         for (Player p : Main.playersAlive)
             p.hidePlayer(dead);
 
+
+        for (Player p : Main.playersDead)
+        {
+            p.showPlayer(dead);
+            dead.showPlayer(p);
+        }
         return;
     }
 }
